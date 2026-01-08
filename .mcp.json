@@ -1,0 +1,80 @@
+{
+  "mcpServers": {
+    "github-local": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}"
+      }
+    },
+    "solana-mcp-official": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@solana/mcp-server"],
+      "env": {}
+    },
+    "solana-opensvm": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@opensvm/solana-mcp-server"],
+      "env": {
+        "SOLANA_RPC_URL": "${SOLANA_RPC_URL:-https://api.mainnet-beta.solana.com}"
+      }
+    },
+    "solana-agent-kit": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@sendaifun/solana-agent-kit-mcp"],
+      "env": {
+        "SOLANA_PRIVATE_KEY": "${SOLANA_PRIVATE_KEY}",
+        "RPC_URL": "${SOLANA_RPC_URL:-https://api.mainnet-beta.solana.com}"
+      }
+    },
+    "docker": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-docker"],
+      "env": {}
+    },
+    "playwright": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-playwright"],
+      "env": {}
+    },
+    "postgresql": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-postgres"],
+      "env": {
+        "POSTGRES_CONNECTION_STRING": "${POSTGRES_CONNECTION_STRING}"
+      }
+    },
+    "sentry": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@sentry/mcp-server"],
+      "env": {
+        "SENTRY_AUTH_TOKEN": "${SENTRY_AUTH_TOKEN}",
+        "SENTRY_ORG_SLUG": "${SENTRY_ORG_SLUG}"
+      }
+    },
+    "zapier": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@zapier/mcp-server"],
+      "env": {
+        "ZAPIER_API_KEY": "${ZAPIER_API_KEY}"
+      }
+    },
+    "apidog": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@apidog/mcp-server"],
+      "env": {
+        "APIDOG_API_KEY": "${APIDOG_API_KEY}"
+      }
+    }
+  }
+}
