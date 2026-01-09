@@ -528,6 +528,8 @@
             margin-bottom: 10px;
             color: #000;
             letter-spacing: -0.01em;
+            position: relative;
+            z-index: 10;
         }
 
         .feature-item p {
@@ -537,6 +539,13 @@
             color: #777;
             line-height: 1.5;
             letter-spacing: -0.01em;
+            position: relative;
+            z-index: 10;
+        }
+
+        .panel-visual {
+            position: relative;
+            z-index: 10;
         }
 
         /* Badge Row */
@@ -1511,15 +1520,17 @@
             margin: 0 auto;
             width: 100%;
             padding: 0 40px;
-            display: grid;
-            grid-template-columns: 3.5fr 6.5fr;
-            /* Text | Visual */
-            gap: 80px;
+            display: flex;
+            flex-direction: column;
             align-items: center;
+            text-align: center;
         }
 
         .exec-text {
             position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .exec-headline {
@@ -1529,6 +1540,7 @@
             color: #111;
             margin-bottom: 24px;
             line-height: 1.1;
+            text-align: center;
         }
 
         .exec-subhead {
@@ -1537,6 +1549,8 @@
             color: #666;
             margin-bottom: 40px;
             line-height: 1.4;
+            text-align: center;
+            max-width: 600px;
         }
 
         .partner-row {
@@ -1548,6 +1562,7 @@
             display: flex;
             gap: 16px;
             opacity: 0.7;
+            justify-content: center;
         }
 
         .exec-micro {
@@ -1969,11 +1984,65 @@
             .social-row {
                 display: none;
             }
-
-            /* Hide icons on mobile header if cramped */
         }
 
-        /* Removed extra closing brace */
+        /* --- Personal AI Video Background --- */
+        .personal-video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .personal-video-bg video.parallax-video {
+            width: 100%;
+            height: 120%;
+            object-fit: cover;
+            opacity: 0.9;
+            transform: translateY(-10%);
+        }
+
+        .video-overlay-gradient {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 5vh;
+            z-index: 1;
+        }
+
+        .video-overlay-gradient.grad-top {
+            top: 0;
+            background: linear-gradient(to bottom, #FFF 0%, transparent 100%);
+        }
+
+        .video-overlay-gradient.grad-bottom {
+            bottom: 0;
+            background: linear-gradient(to top, #FFF 0%, transparent 100%);
+        }
+
+        /* --- Privacy Section Video Background --- */
+        .privacy-video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .privacy-video-bg video.parallax-video-privacy {
+            width: 100%;
+            height: 120%;
+            object-fit: cover;
+            opacity: 0.85;
+            transform: translateY(-10%);
+        }
 
         /* -----------------------------------------------------------
            SECTION 7: PERSONAL AI (LIFE AGENT)
@@ -2009,13 +2078,25 @@
             font-size: 64px;
             font-weight: 600;
             line-height: title-line-height;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
             letter-spacing: -2px;
-            color: #000;
+            color: #000000;
+            /* Pure Black */
+            max-width: 500px;
+        }
+
+        .personal-subhead {
+            font-family: var(--font-body);
+            font-size: 24px;
+            color: #333333;
+            /* Darker Grey */
+            margin-bottom: 40px;
+            line-height: 1.4;
+            max-width: 480px;
+            font-weight: 500;
         }
 
         .command-list {
-            margin-top: 40px;
             display: flex;
             flex-direction: column;
             gap: 16px;
@@ -2024,16 +2105,14 @@
         .command-row {
             display: flex;
             align-items: center;
-            gap: 16px;
             opacity: 0;
-            /* Animate in */
+            /* JS fades in */
             transform: translateY(10px);
         }
 
         .command-bubble {
-            background: rgba(0, 0, 0, 0.03);
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            padding: 12px 20px;
+            background: #F0F2F5;
+            padding: 12px 24px;
             border-radius: 20px;
             font-size: 15px;
             color: #444;
@@ -2048,114 +2127,177 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
 
-        /* Jarvis Brain Card */
+        /* Jarvis Brain Card (Light Mode: Ethereal Frost) */
         .brain-card {
             width: 100%;
-            height: 480px;
-            background: linear-gradient(145deg, #0B0C0D 0%, #0F1012 100%);
+            height: 520px;
+            background: rgba(255, 255, 255, 0.65);
+            /* Frosted White */
             border-radius: 24px;
             box-shadow:
-                0 40px 80px rgba(0, 0, 0, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+                0 40px 100px rgba(0, 0, 0, 0.05),
+                /* Soft diffuse shadow */
+                inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+            /* Inner white rim */
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            position: relative;
+            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
-            overflow: hidden;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
         }
 
-        .brain-svg {
+        /* Ambient Background (Subtle Warmth) */
+        .brain-ambient-bg {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 30% 20%, rgba(57, 255, 20, 0.03) 0%, transparent 50%),
+                /* Faint green hint */
+                radial-gradient(circle at 70% 80%, rgba(200, 220, 255, 0.1) 0%, transparent 50%);
+            /* Cool blue hint */
+            opacity: 1;
+            z-index: 0;
+        }
+
+        /* Neural Canvas (The Brain) */
+        .neural-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            max-width: 600px;
+            z-index: 1;
+            /* Above BG, below nodes */
+            opacity: 0.8;
+            pointer-events: none;
         }
 
-        /* Brain Core */
-        .brain-core {
-            transition: all 0.5s ease;
+        /* Faint Pattern Overlay */
+        .brain-overlay {
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(#000 0.5px, transparent 0.5px);
+            background-size: 20px 20px;
+            opacity: 0.03;
+            /* Very subtle dot grid */
+            pointer-events: none;
+            z-index: 1;
         }
 
-        .core-pulse {
-            animation: brainPulse 3s ease-in-out infinite;
-            transform-origin: center center;
+        /* Stream Container */
+        .life-stream-container {
+            position: relative;
+            z-index: 2;
+            width: 340px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            mask-image: linear-gradient(to bottom,
+                    transparent 0%,
+                    black 15%,
+                    black 85%,
+                    transparent 100%);
+            pointer-events: none;
         }
 
-        @keyframes brainPulse {
-
-            0%,
-            100% {
-                transform: scale(1);
-                opacity: 0.15;
-            }
-
-            50% {
-                transform: scale(1.3);
-                opacity: 0.25;
-            }
+        /* Life Node (Clean White Card) */
+        .life-node {
+            width: 100%;
+            height: 72px;
+            background: #FFFFFF;
+            border: 1px solid rgba(0, 0, 0, 0.03);
+            border-radius: 16px;
+            box-shadow:
+                0 4px 12px rgba(0, 0, 0, 0.03),
+                0 1px 2px rgba(0, 0, 0, 0.02);
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            gap: 16px;
+            margin-bottom: 24px;
+            opacity: 0.6;
+            transform: scale(0.96);
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: absolute;
+            top: 100%;
         }
 
-        .core-inner {
-            animation: coreGlow 2s ease-in-out infinite alternate;
+        /* Active State (Pop) */
+        .life-node.active {
+            opacity: 1;
+            transform: scale(1);
+            box-shadow:
+                0 20px 40px rgba(0, 0, 0, 0.06),
+                0 0 0 1px rgba(57, 255, 20, 0.2);
+            border-color: rgba(57, 255, 20, 0.2);
+            z-index: 10;
         }
 
-        @keyframes coreGlow {
-            0% {
-                opacity: 0.3;
-            }
-
-            100% {
-                opacity: 0.6;
-            }
+        .node-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: #F5F5F7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            transition: all 0.3s;
         }
 
-        /* Flight Paths */
-        .brain-path {
-            fill: none;
-            stroke: url(#path-grad);
-            stroke-width: 2;
-            stroke-linecap: round;
-            stroke-dasharray: 8 4;
-            opacity: 0.7;
-            animation: pathFlow 2s linear infinite;
+        .life-node.active .node-icon {
+            color: #111;
+            background: #E8FFE8;
+            /* Very pale green bg */
         }
 
-        @keyframes pathFlow {
-            0% {
-                stroke-dashoffset: 0;
-            }
-
-            100% {
-                stroke-dashoffset: -24;
-            }
+        .node-icon svg {
+            width: 20px;
+            height: 20px;
         }
 
-        /* Landing Spots */
-        .brain-spot {
-            opacity: 0;
-            /* Animated via GSAP */
+        .node-data {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
         }
 
-        .spot-dot {
-            fill: #39FF14;
-            filter: drop-shadow(0 0 6px #39FF14);
-        }
-
-        .spot-ripple {
-            fill: none;
-            stroke: #39FF14;
-            stroke-width: 1;
-            opacity: 0;
-            transform-origin: center center;
-        }
-
-        .spot-label {
-            fill: #FFF;
+        .node-label {
             font-family: var(--font-body);
+            font-size: 15px;
+            color: #111;
+            font-weight: 600;
+        }
+
+        .node-status {
+            font-family: 'DM Sans', sans-serif;
             font-size: 11px;
+            color: #888;
             font-weight: 500;
-            letter-spacing: 0.02em;
-            opacity: 0.9;
+        }
+
+        .life-node.active .node-status {
+            color: #00A651;
+            /* Darker clean green for visibility on white */
+        }
+
+        /* Processing Scanner (Subtle Ripple) */
+        .process-scanner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 380px;
+            height: 90px;
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0;
+            background: radial-gradient(closest-side, rgba(57, 255, 20, 0.04) 0%, transparent 100%);
         }
 
         /* Reduced Motion */
@@ -2206,7 +2348,7 @@
             z-index: 50;
             width: 100%;
             min-height: 90vh;
-            background-color: #FFFFFF;
+            /* background-color: #FFFFFF; Removed for video */
             padding-top: var(--section-gap);
             padding-bottom: var(--section-gap);
             display: flex;
@@ -2303,22 +2445,23 @@
             font-family: var(--font-display);
             font-size: clamp(48px, 4vw, 64px);
             font-weight: 600;
-            color: #111;
+            color: #FFFFFF;
             margin-bottom: 30px;
             line-height: 1.1;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
 
         .privacy-subhead {
             font-family: var(--font-body);
             font-size: 24px;
-            color: #666;
+            color: rgba(255, 255, 255, 0.85);
             margin-bottom: 20px;
         }
 
         .privacy-micro {
             font-size: 14px;
             font-weight: 600;
-            color: #111;
+            color: rgba(255, 255, 255, 0.9);
             display: flex;
             align-items: center;
             gap: 10px;
@@ -2327,7 +2470,13 @@
         .lock-icon {
             width: 16px;
             height: 16px;
-            fill: #111;
+            fill: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Light eyebrow for sections with video backgrounds */
+        .section-privacy .eyebrow,
+        .section-public .eyebrow {
+            color: rgba(255, 255, 255, 0.7);
         }
 
         @media (max-width: 900px) {
@@ -2391,15 +2540,16 @@
             font-family: var(--font-display);
             font-size: clamp(48px, 4vw, 72px);
             font-weight: 600;
-            color: #111;
+            color: rgba(255, 255, 255, 0.95);
             margin-bottom: 24px;
             line-height: 1.1;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
 
         .public-subhead {
             font-family: var(--font-body);
             font-size: 24px;
-            color: #666;
+            color: rgba(255, 255, 255, 0.8);
             margin-bottom: 60px;
         }
 
@@ -3668,6 +3818,73 @@
             overflow: hidden;
         }
 
+        /* Panel-specific grid overrides */
+        .glass-panel .bg-grid-faint {
+            opacity: 1;
+            z-index: 1;
+            background-size: 20px 20px;
+            /* Smaller grid for panel scale */
+            background-image:
+                linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+        }
+
+        .glass-panel .grid-dataflow {
+            z-index: 2;
+        }
+
+        .glass-panel .data-stream.ds-h {
+            width: 80px;
+            height: 2px;
+            animation: panelFlowH 5s linear infinite;
+        }
+
+        .glass-panel .data-stream.ds-v {
+            width: 2px;
+            height: 80px;
+            animation: panelFlowV 6s linear infinite;
+        }
+
+        @keyframes panelFlowH {
+            0% {
+                left: -80px;
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.4;
+            }
+
+            90% {
+                opacity: 0.4;
+            }
+
+            100% {
+                left: 100%;
+                opacity: 0;
+            }
+        }
+
+        @keyframes panelFlowV {
+            0% {
+                top: -80px;
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.8;
+            }
+
+            90% {
+                opacity: 0.8;
+            }
+
+            100% {
+                top: 100%;
+                opacity: 0;
+            }
+        }
+
         .glass-panel:hover {
             transform: translateY(-5px);
             background: rgba(255, 255, 255, 0.8);
@@ -3968,6 +4185,45 @@
         .glass-panel:hover .reactor-core {
             animation-duration: 1.5s !important;
         }
+
+        /* Final CTA Parallax & Tint Removal */
+        .section-final-cta {
+            position: relative;
+            overflow: hidden;
+            /* Ensure video doesn't bleed */
+        }
+
+        .final-video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120%;
+            /* Taller for parallax movement */
+            z-index: 0;
+            will-change: transform;
+        }
+
+        .final-video-bg video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .final-video-overlay {
+            /* User requested REMOVAL of tints */
+            display: none !important;
+            opacity: 0 !important;
+        }
+
+        /* Ensure content is above video */
+        .cta-container,
+        .bg-grid-faint,
+        .grid-dataflow,
+        .scanline-overlay {
+            position: relative;
+            z-index: 2;
+        }
     </style>
 </head>
 
@@ -4191,6 +4447,13 @@
                         <div class="star-rail star-b"></div>
                         <div class="star-rail star-l"></div>
 
+                        <!-- Grid Background + Scanning Beams -->
+                        <div class="bg-grid-faint"></div>
+                        <div class="grid-dataflow">
+                            <div class="data-stream ds-h" style="top: 30%;"></div>
+                            <div class="data-stream ds-v" style="left: 40%;"></div>
+                        </div>
+
                         <div class="panel-visual">
                             <svg class="stat-glyph" viewBox="0 0 64 64" fill="none">
                                 <!-- Guide Rails -->
@@ -4223,6 +4486,13 @@
                         <div class="star-rail star-r"></div>
                         <div class="star-rail star-b"></div>
                         <div class="star-rail star-l"></div>
+
+                        <!-- Grid Background + Scanning Beams -->
+                        <div class="bg-grid-faint"></div>
+                        <div class="grid-dataflow">
+                            <div class="data-stream ds-h" style="top: 50%; animation-delay: 1.5s;"></div>
+                            <div class="data-stream ds-v" style="left: 60%; animation-delay: 2.5s;"></div>
+                        </div>
 
                         <div class="panel-visual">
                             <svg class="stat-glyph" viewBox="0 0 64 64" fill="none">
@@ -4258,6 +4528,13 @@
                         <div class="star-rail star-r"></div>
                         <div class="star-rail star-b"></div>
                         <div class="star-rail star-l"></div>
+
+                        <!-- Grid Background + Scanning Beams -->
+                        <div class="bg-grid-faint"></div>
+                        <div class="grid-dataflow">
+                            <div class="data-stream ds-h" style="top: 70%; animation-delay: 3s;"></div>
+                            <div class="data-stream ds-v" style="left: 25%; animation-delay: 4s;"></div>
+                        </div>
 
                         <div class="panel-visual">
                             <svg class="stat-glyph" viewBox="0 0 64 64" fill="none">
@@ -4496,8 +4773,8 @@
 
         <!-- SECTION 7: PERSONAL AI (LIFE AGENT) -->
         <section class="section-personal" id="sectionPersonal">
-            <!-- BACKGROUND EFFECTS (New Grid System) -->
-            <div class="bg-grid-faint"></div>
+            <!-- BACKGROUND EFFECTS -->
+            <div class="bg-grid-faint" style="opacity: 0.3;"></div>
             <div class="grid-dataflow">
                 <div class="data-stream ds-v" style="left: 15%; top: 0; animation-duration: 9s; animation-delay: 0.5s;">
                 </div>
@@ -4514,6 +4791,11 @@
                 <div class="personal-content">
                     <span class="eyebrow" id="persEyebrow">Personal AI</span>
                     <h2 class="personal-headline" id="persHeadline">Beyond trading.</h2>
+                    <p class="personal-subhead" id="persSubhead">
+                        Jarvis studies everything you do. It learns your behavior, priorities, and communication style
+                        to anticipate your needs before you ask. From automating workflows to managing relationships, it
+                        operates autonomously to become your ultimate life operating system.
+                    </p>
 
                     <div class="command-list">
                         <!-- Cmd 1 -->
@@ -4531,76 +4813,40 @@
                     </div>
                 </div>
 
-                <!-- Right: Visual (Jarvis Brain - Neural Command Center) -->
+                <!-- Right: Visual (Living Workflow Stream) -->
                 <div class="brain-card" id="brainCard">
-                    <svg class="brain-svg" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid meet">
-                        <defs>
-                            <!-- Gradient for paths -->
-                            <linearGradient id="path-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-                                <stop offset="0%" style="stop-color: #39FF14; stop-opacity: 0.8" />
-                                <stop offset="100%" style="stop-color: #FFF; stop-opacity: 0.2" />
-                            </linearGradient>
-                            <!-- Glow filter -->
-                            <filter id="glow-brain" x="-50%" y="-50%" width="200%" height="200%">
-                                <feGaussianBlur stdDeviation="4" result="coloredBlur" />
-                                <feMerge>
-                                    <feMergeNode in="coloredBlur" />
-                                    <feMergeNode in="SourceGraphic" />
-                                </feMerge>
-                            </filter>
-                        </defs>
+                    <!-- Ambient Background -->
+                    <div class="brain-ambient-bg"></div>
 
-                        <!-- BRAIN CORE (Stylized polygonal brain) -->
-                        <g class="brain-core" transform="translate(300, 200)">
-                            <!-- Outer shell (abstract brain shape) -->
-                            <ellipse rx="50" ry="40" fill="none" stroke="#FFF" stroke-width="1.5" opacity="0.3" />
-                            <ellipse rx="35" ry="28" fill="none" stroke="#FFF" stroke-width="1" opacity="0.5" />
-                            <!-- Inner glowing core -->
-                            <circle r="20" fill="#39FF14" opacity="0.15" class="core-pulse" />
-                            <circle r="10" fill="#39FF14" opacity="0.4" filter="url(#glow-brain)" class="core-inner" />
-                            <circle r="4" fill="#FFF" />
-                        </g>
+                    <!-- Neural Canvas (3D Particles) -->
+                    <canvas id="brainCanvas" class="neural-canvas"></canvas>
 
-                        <!-- FLIGHT PATHS (Curved bezier arrows) -->
-                        <!-- Path 1: Top Left - "Send email" -->
-                        <path d="M300,200 Q200,150 80,60" class="brain-path" id="bpath-1" />
-                        <!-- Path 2: Top Right - "Connect receipt to tax software" -->
-                        <path d="M300,200 Q400,120 520,50" class="brain-path" id="bpath-2" />
-                        <!-- Path 3: Bottom Right - "Mike arrives 9pm..." -->
-                        <path d="M300,200 Q420,280 540,340" class="brain-path" id="bpath-3" />
-                        <!-- Path 4: Bottom Left - "Order flowers" -->
-                        <path d="M300,200 Q180,280 60,350" class="brain-path" id="bpath-4" />
+                    <!-- Faint Pattern Overlay -->
+                    <div class="brain-overlay"></div>
 
-                        <!-- LANDING SPOTS (Circles + Text Labels) -->
-                        <!-- Spot 1 -->
-                        <g class="brain-spot" id="spot-1" transform="translate(80, 60)">
-                            <circle r="6" class="spot-dot" />
-                            <circle r="12" class="spot-ripple" />
-                            <text x="15" y="5" class="spot-label">Send email</text>
-                        </g>
+                    <!-- The Stream -->
+                    <div class="life-stream-container">
+                        <!-- Stream Items will be injected via JS for infinite loop, but we provide initial static ones for SEO/Layout -->
+                        <div class="life-node">
+                            <div class="node-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
+                                        fill="currentColor" />
+                                </svg>
+                            </div>
+                            <div class="node-data">
+                                <span class="node-label">Drafting Email</span>
+                                <span class="node-status">Processing...</span>
+                            </div>
+                        </div>
+                    </div>
 
-                        <!-- Spot 2 -->
-                        <g class="brain-spot" id="spot-2" transform="translate(520, 50)">
-                            <circle r="6" class="spot-dot" />
-                            <circle r="12" class="spot-ripple" />
-                            <text x="-15" y="5" text-anchor="end" class="spot-label">Connect receipt to tax
-                                software</text>
-                        </g>
+                    <!-- Processing Scanner (Center Highlight) -->
+                    <div class="process-scanner"></div>
 
-                        <!-- Spot 3 -->
-                        <g class="brain-spot" id="spot-3" transform="translate(540, 340)">
-                            <circle r="6" class="spot-dot" />
-                            <circle r="12" class="spot-ripple" />
-                            <text x="-15" y="5" text-anchor="end" class="spot-label">Mike arrives 9pm — prep news</text>
-                        </g>
-
-                        <!-- Spot 4 -->
-                        <g class="brain-spot" id="spot-4" transform="translate(60, 350)">
-                            <circle r="6" class="spot-dot" />
-                            <circle r="12" class="spot-ripple" />
-                            <text x="15" y="5" class="spot-label">Order flowers for Aunt Rose</text>
-                        </g>
-                    </svg>
+                    <!-- Faint Overlay -->
+                    <div class="brain-overlay"></div>
                 </div>
 
             </div>
@@ -4608,6 +4854,13 @@
 
         <!-- SECTION 8: THE WATCHER (PRIVACY) -->
         <section class="section-privacy" id="sectionPrivacy">
+            <!-- BACKGROUND (Parallax Video) -->
+            <div class="privacy-video-bg">
+                <video src="assets/Jarvis4.mp4" autoplay loop muted playsinline class="parallax-video-privacy"></video>
+                <div class="video-overlay-gradient grad-top"></div>
+                <div class="video-overlay-gradient grad-bottom"></div>
+            </div>
+
             <div class="privacy-container">
                 <!-- Visual Left -->
                 <div class="privacy-visual" id="privacyVisual">
@@ -5199,7 +5452,7 @@
             persTl.from("#persEyebrow", { y: 20, opacity: 0, duration: 0.5 })
                 .from("#persHeadline", { y: 30, opacity: 0, duration: 0.6 }, "-=0.3");
 
-            // Stagger Commands
+            // Stagger Commands (Left Side)
             persTl.from(".command-row", {
                 x: -30,
                 opacity: 0,
@@ -5208,21 +5461,423 @@
                 ease: "power2.out"
             }, "-=0.2");
 
-            // Highlight active command simulation in timeline
-            persTl.to("#cmd1", { opacity: 1, duration: 0.3 })
-                .to("#cmd2", { opacity: 0.5, duration: 0.3 }, ">0.5") // dim previous
-                .to("#cmd2", { opacity: 1, duration: 0.3 }, "<")      // activate current (oops logic check, just keeping them all semi-active is safer for design)
-                // Actually, let's just fade them in to full opacity
-                .to(".command-row", { opacity: 1, duration: 0.5 }, "-=1");
-
-            // Visual Card Entrance
-            persTl.from("#voiceCard", {
+            // Brain Card Entrance (Right Side)
+            persTl.from("#brainCard", {
                 y: 50,
                 opacity: 0,
                 scale: 0.95,
                 duration: 1,
                 ease: "power2.out"
-            }, "-=1.5");
+            }, "-=1.0");
+
+            // --- LIVING WORKFLOW STREAM LOGIC ---
+            if (!prefersReducedMotion) {
+                const streamContainer = document.querySelector('.life-stream-container');
+                const processScanner = document.querySelector('.process-scanner');
+
+                // Reveal Scanner
+                persTl.to(processScanner, { opacity: 1, duration: 1 }, "-=0.5");
+
+                // Stream Data
+                const lifeTasks = [
+                    { label: "Drafting Email", status: "Composer Active", icon: "M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" },
+                    { label: "Sync Calendar", status: "Optimizing Schedule", icon: "M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z" },
+                    { label: "Deep Work Block", status: "Notifications Muted", icon: "M6 14l3 3v5h6v-5l3-3V9H6v5zm2-3h8v2H8v-2z" },
+                    { label: "Tax Receipt", status: "Categorizing", icon: "M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z" },
+                    { label: "Evening Summary", status: "Compiling", icon: "M14 17H4v2h10v-2zm6-8H4v2h16V9zM4 15h16v-2H4v2zM4 5v2h16V5H4z" }
+                ];
+
+                let taskIndex = 0;
+
+                function spawnLifeNode() {
+                    if (!document.body.contains(streamContainer)) return; // Safety check
+
+                    const data = lifeTasks[taskIndex % lifeTasks.length];
+                    taskIndex++;
+
+                    // Create Node
+                    const node = document.createElement('div');
+                    node.classList.add('life-node');
+                    node.innerHTML = `
+                        <div class="node-icon">
+                            <svg viewBox="0 0 24 24"><path d="${data.icon}" fill="currentColor"/></svg>
+                        </div>
+                        <div class="node-data">
+                            <span class="node-label">${data.label}</span>
+                            <span class="node-status">${data.status}</span>
+                        </div>
+                    `;
+                    streamContainer.appendChild(node);
+
+                    // Random horizontal start (-20px to 20px)
+                    const startX = (Math.random() - 0.5) * 40;
+                    gsap.set(node, { x: startX });
+
+                    // Animation (Vertical Flow)
+                    gsap.fromTo(node,
+                        { top: "110%", opacity: 0.0, scale: 0.9 },
+                        {
+                            top: "-30%",
+                            opacity: 0.6, // Base opacity (active state handles full opacity)
+                            duration: 10, // Slower, more chill
+                            ease: "none",
+                            onUpdate: function () {
+                                // Progress passed as 'this.ratio' (0 to 1)
+                                const progress = this.ratio;
+
+                                // Fade in/out at edges
+                                if (progress < 0.1) node.style.opacity = progress * 6;
+                                else if (progress > 0.9) node.style.opacity = (1 - progress) * 6;
+
+                                // Activate when near center (approx 0.4 to 0.6 progress)
+                                if (progress > 0.40 && progress < 0.60) {
+                                    if (!node.classList.contains('active')) {
+                                        node.classList.add('active');
+                                        // Slight pop when active
+                                        gsap.to(node, { scale: 1.05, duration: 0.5 });
+                                    }
+                                } else {
+                                    if (node.classList.contains('active')) {
+                                        node.classList.remove('active');
+                                        gsap.to(node, { scale: 0.96, duration: 0.5 });
+                                    }
+                                }
+                            },
+                            onComplete: () => {
+                                node.remove();
+                            }
+                        }
+                    );
+
+                    // Horizontal Drift (Sine Wave)
+                    gsap.to(node, {
+                        x: startX + (Math.random() - 0.5) * 60, // Drift across
+                        duration: 10,
+                        ease: "sine.inOut"
+                    });
+
+                    // Recursion
+                    setTimeout(spawnLifeNode, 2800);
+                }
+
+                // Start the stream after a slight delay
+                setTimeout(spawnLifeNode, 1000);
+            } // End of if (!prefersReducedMotion)
+
+            // --- PRIVACY SECTION PARALLAX VIDEO ---
+            const privacySection = document.querySelector('.section-privacy');
+            const privacyVideo = document.querySelector('.parallax-video-privacy');
+
+            if (privacySection && privacyVideo) {
+                gsap.to(privacyVideo, {
+                    yPercent: 20, // Parallax lag
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: privacySection,
+                        start: "top bottom",
+                        end: "bottom top",
+                        scrub: true
+                    }
+                });
+            }
+
+            // --- NEURAL COMPANION CORE (The "Living Lattice") ---
+            function initBrainEngine() {
+                const canvas = document.getElementById('brainCanvas');
+                if (!canvas) return;
+                const ctx = canvas.getContext('2d');
+                const container = document.querySelector('.life-stream-container');
+
+                // --- CORE SETTINGS ---
+                let width, height;
+                const particleCount = 280; // "Faint Lattice" - dense enough for structure
+                const brainRadius = 130; // Size of the core
+                const connectionDist = 45; // Max dist to draw lines
+
+                // --- PHYSICS STATE ---
+                let rotation = { x: 0, y: 0 };
+                let targetRotation = { x: 0, y: 0 };
+                let mouse = { x: 0, y: 0, active: false };
+                let time = 0;
+
+                // --- SCANNER STATE ---
+                let scanLine = -200; // Vertical position of the "MRI" scan
+                let scanning = true;
+
+                // --- PARTICLES ---
+                let particles = [];
+
+                // Resize Logic (High DPI)
+                const resize = () => {
+                    const rect = canvas.getBoundingClientRect();
+                    width = rect.width;
+                    height = rect.height;
+                    canvas.width = width * 2;
+                    canvas.height = height * 2;
+                    ctx.scale(2, 2);
+                };
+                resize();
+                window.addEventListener('resize', resize);
+
+                // --- INTERACTION ---
+                document.addEventListener('mousemove', (e) => {
+                    const rec = canvas.getBoundingClientRect();
+                    const cx = rec.left + rec.width / 2;
+                    const cy = rec.top + rec.height / 2;
+
+                    // Normalize -1 to 1 for Rotation Target
+                    targetRotation.y = ((e.clientX - cx) / (window.innerWidth / 2)) * 0.4;
+                    targetRotation.x = ((e.clientY - cy) / (window.innerHeight / 2)) * 0.4;
+
+                    // Mouse Pos for Magnetism (Relative to Canvas CENTER)
+                    mouse.x = (e.clientX - rec.left) - width / 2;
+                    mouse.y = (e.clientY - rec.top) - height / 2;
+                    mouse.active = true;
+                });
+
+                // --- PARTICLE CLASS ---
+                class CoreNode {
+                    constructor(id) {
+                        this.id = id;
+                        // Initialize on Sphere Surface (Fibonacci)
+                        const phi = Math.acos(-1 + (2 * id) / particleCount);
+                        const theta = Math.sqrt(particleCount * Math.PI) * phi;
+                        const r = Math.cbrt(Math.random()) * brainRadius; // Volume dist
+
+                        this.x = r * Math.sin(phi) * Math.cos(theta);
+                        this.y = r * Math.sin(phi) * Math.sin(theta);
+                        this.z = r * Math.cos(phi);
+
+                        // Base position to return to (for springing)
+                        this.base = { x: this.x, y: this.y, z: this.z };
+
+                        // Velocity (Drifting)
+                        this.vx = (Math.random() - 0.5) * 0.1;
+                        this.vy = (Math.random() - 0.5) * 0.1;
+                        this.vz = (Math.random() - 0.5) * 0.1;
+
+                        // State
+                        this.projected = { x: 0, y: 0, z: 0, scale: 0, alpha: 0 };
+                        this.isScanned = 0; // 0 to 1 fade out
+                    }
+
+                    update() {
+                        // 1. Idle Drift
+                        this.x += this.vx;
+                        this.y += this.vy;
+                        this.z += this.vz;
+
+                        // 2. Soft Spring to Base (Structure Retention)
+                        this.vx += (this.base.x - this.x) * 0.001;
+                        this.vy += (this.base.y - this.y) * 0.001;
+                        this.vz += (this.base.z - this.z) * 0.001;
+
+                        // 3. Mouse Magnetism (Repulsion/Attraction)
+                        if (mouse.active) {
+                            // Gentle "Awareness" jitter
+                            this.x += (Math.random() - 0.5) * 0.05;
+                        }
+
+                        // Damping
+                        this.vx *= 0.96;
+                        this.vy *= 0.96;
+                        this.vz *= 0.96;
+                    }
+                }
+
+                // --- INIT PARTICLES ---
+                for (let i = 0; i < particleCount; i++) particles.push(new CoreNode(i));
+
+                // --- MAIN LOOP ---
+                function animate() {
+                    time += 0.05;
+                    ctx.clearRect(0, 0, width, height);
+
+                    // 1. Update Rotation with Inertia
+                    rotation.x += (targetRotation.x - rotation.x) * 0.05;
+                    rotation.y += (targetRotation.y - rotation.y) * 0.05;
+
+                    // Precalc Matrix
+                    const cosX = Math.cos(rotation.x), sinX = Math.sin(rotation.x);
+                    const cosY = Math.cos(rotation.y), sinY = Math.sin(rotation.y);
+
+                    // 2. Find Active Task (The "Attractor")
+                    let taskTarget = null;
+                    const activeNode = document.querySelector('.life-node.active');
+                    if (activeNode && container) {
+                        const nRect = activeNode.getBoundingClientRect();
+                        const cRect = canvas.getBoundingClientRect();
+                        if (nRect.top < cRect.bottom && nRect.bottom > cRect.top) {
+                            taskTarget = {
+                                x: (nRect.left + nRect.width / 2) - cRect.left,
+                                y: (nRect.top + nRect.height / 2) - cRect.top
+                            };
+                        }
+                    }
+
+                    // 3. Scan Logic
+                    scanLine += 2;
+                    if (scanLine > width + 100) scanLine = -200;
+
+
+                    // 4. Update & Project All Particles
+                    let closestToTask = null;
+                    let minTaskDist = 99999;
+
+                    particles.forEach(p => {
+                        p.update();
+
+                        // Rotate Y
+                        let x1 = p.x * cosY - p.z * sinY;
+                        let z1 = p.z * cosY + p.x * sinY;
+                        // Rotate X
+                        let y2 = p.y * cosX - z1 * sinX;
+                        let z2 = z1 * cosX + p.y * sinX;
+
+                        // Perspective
+                        const perspective = 400 / (400 + z2);
+                        p.projected.x = width / 2 + x1 * perspective;
+                        p.projected.y = height / 2 + y2 * perspective;
+                        p.projected.z = z2;
+                        p.projected.scale = perspective;
+
+                        // Depth Alpha: Fade back nodes
+                        const alpha = Math.max(0.1, Math.min(1, (z2 + brainRadius) / (brainRadius * 2) + 0.1));
+                        p.projected.alpha = alpha;
+
+                        // Scan Check
+                        const distToScan = Math.abs(p.projected.x - scanLine);
+                        if (distToScan < 30) {
+                            p.isScanned = 1; // Trigger glow
+                        } else {
+                            p.isScanned *= 0.9; // Fade out
+                        }
+
+                        // Find Closest to Task
+                        if (taskTarget && z2 > 0) {
+                            const dx = p.projected.x - taskTarget.x;
+                            const dy = p.projected.y - taskTarget.y;
+                            const d2 = dx * dx + dy * dy;
+                            if (d2 < minTaskDist) {
+                                minTaskDist = d2;
+                                closestToTask = p;
+                            }
+                        }
+                    });
+
+
+                    // 5. Draw Connections (The Lattice)
+                    ctx.lineWidth = 0.5;
+
+                    for (let i = 0; i < particleCount; i++) {
+                        const p1 = particles[i];
+                        let connections = 0;
+                        for (let j = i + 1; j < particleCount; j++) {
+                            const p2 = particles[j];
+
+                            // 3D Dist check (Real Structure)
+                            const dx = p1.x - p2.x;
+                            const dy = p1.y - p2.y;
+                            const dz = p1.z - p2.z;
+                            const distSq = dx * dx + dy * dy + dz * dz;
+
+                            if (distSq < connectionDist * connectionDist) {
+                                // Calculate Line Alpha
+                                const avgAlpha = (p1.projected.alpha + p2.projected.alpha) * 0.5;
+                                if (avgAlpha < 0.2) continue; // Skip deeply hidden lines
+
+                                let r = 0, g = 0, b = 0, a = avgAlpha * 0.15; // Base color
+
+                                // Scan Glow
+                                const scanIntensity = Math.max(p1.isScanned, p2.isScanned);
+                                if (scanIntensity > 0.1) {
+                                    // Electric Green overlay
+                                    r = 57; g = 255; b = 20;
+                                    a = scanIntensity * 0.6; // Brigher
+                                    ctx.lineWidth = 1; /* Thicker */
+                                } else {
+                                    ctx.lineWidth = 0.5;
+                                }
+
+                                ctx.strokeStyle = `rgba(${r},${g},${b},${a})`;
+                                ctx.beginPath();
+                                ctx.moveTo(p1.projected.x, p1.projected.y);
+                                ctx.lineTo(p2.projected.x, p2.projected.y);
+                                ctx.stroke();
+
+                                connections++;
+                                if (connections > 4) break;
+                            }
+                        }
+                    }
+
+                    // 6. Draw Nodes
+                    particles.forEach(p => {
+                        const s = p.projected.scale;
+                        // Base Node
+                        ctx.fillStyle = `rgba(30, 30, 30, ${p.projected.alpha})`;
+
+                        // Scanned Node?
+                        if (p.isScanned > 0.05) {
+                            ctx.fillStyle = `rgba(57, 255, 20, ${p.isScanned})`;
+                            // Bloom
+                            ctx.shadowBlur = 10 * p.isScanned;
+                            ctx.shadowColor = '#39FF14';
+                        } else {
+                            ctx.shadowBlur = 0;
+                        }
+
+                        ctx.beginPath();
+                        ctx.arc(p.projected.x, p.projected.y, 1.5 * s, 0, Math.PI * 2);
+                        ctx.fill();
+                    });
+                    ctx.shadowBlur = 0; // Reset
+
+
+                    // 7. Tether to Task (The "Lock On")
+                    if (taskTarget && closestToTask) {
+                        if (minTaskDist < 80000) { // Sqrt(80000) ~= 280px
+                            const p = closestToTask;
+
+                            // Organic Curve (Tentacle)
+                            const cp1x = p.projected.x + (taskTarget.x - p.projected.x) * 0.4;
+                            const cp1y = p.projected.y - 40 * Math.sin(time * 0.1); // Wiggle
+
+                            const cp2x = taskTarget.x - (taskTarget.x - p.projected.x) * 0.4;
+                            const cp2y = taskTarget.y + 40 * Math.cos(time * 0.13); // Wiggle
+
+                            // Gradient Tether
+                            const grad = ctx.createLinearGradient(p.projected.x, p.projected.y, taskTarget.x, taskTarget.y);
+                            grad.addColorStop(0, '#39FF14');
+                            grad.addColorStop(1, 'rgba(57, 255, 20, 0.1)'); // Fade out at task
+
+                            ctx.shadowBlur = 15;
+                            ctx.shadowColor = 'rgba(57, 255, 20, 0.5)';
+                            ctx.strokeStyle = grad;
+                            ctx.lineWidth = 1.5;
+                            ctx.lineCap = 'round';
+
+                            ctx.beginPath();
+                            ctx.moveTo(p.projected.x, p.projected.y);
+                            ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, taskTarget.x, taskTarget.y);
+                            ctx.stroke();
+                            ctx.shadowBlur = 0;
+
+                            // Contact Point Pulse
+                            ctx.fillStyle = '#39FF14';
+                            ctx.beginPath();
+                            ctx.arc(taskTarget.x, taskTarget.y, 3 + Math.sin(time) * 1, 0, Math.PI * 2);
+                            ctx.fill();
+                        }
+                    }
+
+                    requestAnimationFrame(animate);
+                }
+                animate();
+            }
+
+            // Init with delay
+            setTimeout(initBrainEngine, 500);
 
             // --- SECTION 8: PRIVACY ---
             const privTl = gsap.timeline({
@@ -5645,6 +6300,22 @@
 
             // Footer Fade
             finalTl.from("#mainFooter", { opacity: 0, duration: 1 }, "-=0.2");
+
+            // --- FOOTER PARALLAX ---
+            // Move the video background slowly against scroll
+            gsap.fromTo(".final-video-bg",
+                { y: "-20%" },
+                {
+                    y: "10%",
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: "#sectionFinal",
+                        start: "top bottom",
+                        end: "bottom top",
+                        scrub: true
+                    }
+                }
+            );
 
             // --- SECTION 3: SOLANA NANOBANANA MOTION ---
             // Guard: Reduced Motion
