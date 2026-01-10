@@ -114,6 +114,14 @@
 
         // Start Loop
         animate();
+
+        // Fonts can load after first measurement, affecting node box sizes.
+        // Re-measure once fonts are ready to avoid edge clipping on mobile.
+        if (document.fonts && typeof document.fonts.ready?.then === 'function') {
+            document.fonts.ready.then(() => resize()).catch(() => { });
+        } else {
+            setTimeout(() => resize(), 600);
+        }
     }
 
     // Initialize DOM Nodes: Find them and override CSS to center them
@@ -159,10 +167,6 @@
         width = container.offsetWidth;
         height = container.offsetHeight;
 
-        // Responsive Radius
-        const isMobile = width < 768;
-        NODE_CONFIG.radius = isMobile ? 170 : 290; // Increased from 120/200 to 170/290 to clear core text
-
         // Keep outer rings/glow safely inside the canvas bounds.
         // This prevents slight clipping on tighter layouts (e.g. 2-col desktop / mobile).
         const maxOrbitRadius = 280;
@@ -177,6 +181,20 @@
         ctx.scale(dpr, dpr);
 
         updateNodeMetrics();
+
+        // Responsive Node Orbit Radius (ensure labels stay within bounds on mobile)
+        const isMobile = width < 768;
+        if (isMobile) {
+            const padding = 12;
+            const maxHalfW = domNodes.reduce((max, node) => Math.max(max, node.halfWidth || 0), 0);
+            const maxHalfH = domNodes.reduce((max, node) => Math.max(max, node.halfHeight || 0), 0);
+            const maxRadiusX = Math.max(0, (width / 2) - maxHalfW - padding);
+            const maxRadiusY = Math.max(0, (height / 2) - maxHalfH - padding);
+            const fitRadius = Math.min(maxRadiusX, maxRadiusY);
+            NODE_CONFIG.radius = Math.max(110, Math.min(170, fitRadius));
+        } else {
+            NODE_CONFIG.radius = 290;
+        }
     }
 
     function updateNodeMetrics() {

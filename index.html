@@ -1274,6 +1274,7 @@
             left: 0;
             width: 100%;
             height: 100vh;
+            height: 100dvh;
             /* Always fills viewport */
             overflow: hidden;
             z-index: 1;
@@ -1288,6 +1289,7 @@
             width: 100%;
             height: 100%;
             z-index: 1;
+            background: #0B0C0D;
             /* Entrance Fade */
             opacity: 0;
             transition: opacity 1.5s ease-out;
@@ -1302,8 +1304,11 @@
             height: 100%;
             object-fit: cover;
             /* Static scale for bleeding edges, NO JITTER PARALLAX */
-            transform: scale(1.05);
+            transform: translateZ(0) scale(1.05);
             filter: brightness(0.9) contrast(1.1);
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            will-change: transform;
         }
 
         /* Scanlines Overlay */
@@ -4244,11 +4249,37 @@
             .token-content {
                 align-items: center;
                 width: 100%;
+                text-align: center;
             }
 
             .token-subhead {
                 margin-left: auto;
                 margin-right: auto;
+            }
+
+            .token-headline {
+                font-size: clamp(40px, 10vw, 56px);
+            }
+
+            .token-micro {
+                justify-content: center;
+                text-align: center;
+            }
+
+            #tokBtnGroup {
+                justify-content: center !important;
+                align-items: center !important;
+                width: 100%;
+            }
+
+            #tokLogos {
+                width: 100%;
+            }
+
+            #tokLogos > div {
+                justify-content: center !important;
+                align-items: center !important;
+                width: 100%;
             }
 
             .token-visual {
@@ -4948,6 +4979,7 @@
         <div class="video-container" id="videoWrapper">
             <!-- Using local file -->
             <video autoplay loop muted playsinline id="mainVideo">
+                <source src="jarvis3_mobile.mp4" type="video/mp4" media="(max-width: 768px)">
                 <source src="jarvis3_optimized.webm" type="video/webm">
                 <source src="jarvis3_optimized.mp4" type="video/mp4">
             </video>
@@ -5088,6 +5120,7 @@
                     <div class="glass-card" id="cardLeft">
                         <div class="card-video-layer">
                             <video autoplay loop muted playsinline>
+                                <source src="section2-1_mobile.mp4" type="video/mp4" media="(max-width: 768px)">
                                 <source src="section2-1.webm" type="video/webm">
                                 <source src="section2-1_optimized.mp4" type="video/mp4">
                             </video>
@@ -5106,6 +5139,7 @@
                     <div class="glass-card" id="cardRight">
                         <div class="card-video-layer">
                             <video autoplay loop muted playsinline>
+                                <source src="section2-2_mobile.mp4" type="video/mp4" media="(max-width: 768px)">
                                 <source src="section2-2.webm" type="video/webm">
                                 <source src="section2-2_optimized.mp4" type="video/mp4">
                             </video>
@@ -6244,6 +6278,7 @@ jarvis start --daemon`
             <!-- VIDEO BACKGROUND -->
             <div class="final-video-bg">
                 <video autoplay loop muted playsinline>
+                    <source src="jarvis2_mobile.mp4" type="video/mp4" media="(max-width: 768px)">
                     <source src="jarvis2_optimized.webm" type="video/webm">
                     <source src="jarvis2_optimized.mp4" type="video/mp4">
                 </video>
