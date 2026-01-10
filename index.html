@@ -456,12 +456,32 @@
         /* Mobile adjustments */
         @media (max-width: 768px) {
             .manifesto-section {
-                height: 50vh;
+                width: 100vw;
+                height: 100vh;
+                height: 100svh;
+                min-height: 100svh;
+                background: #f2f2f2;
+            }
+
+            .manifesto-inner {
+                width: 100vw;
+            }
+
+            .manifesto-section::before {
+                background:
+                    repeating-linear-gradient(0deg,
+                        transparent,
+                        transparent 59px,
+                        rgba(0, 0, 0, 0.03) 60px),
+                    repeating-linear-gradient(90deg,
+                        transparent,
+                        transparent 59px,
+                        rgba(0, 0, 0, 0.03) 60px);
             }
 
             .manifesto-track span,
             .manifesto-track .letter {
-                font-size: clamp(144px, 36vw, 480px);
+                font-size: clamp(220px, 55vw, 820px);
             }
         }
 
@@ -1193,6 +1213,7 @@
                 height: 60px;
                 width: 100%;
                 flex-direction: row;
+                justify-content: center;
             }
 
             .accent-line {
@@ -1208,6 +1229,7 @@
                 left: auto;
                 background: white;
                 border: 1px solid rgba(0, 0, 0, 0.05);
+                margin: 0 auto;
             }
         }
 
@@ -2169,6 +2191,24 @@
             .exec-container {
                 grid-template-columns: 1fr;
                 gap: 50px;
+                justify-items: center;
+                padding: 0 20px;
+            }
+
+            .exec-text {
+                padding-right: 0;
+            }
+
+            .partner-row {
+                flex-wrap: wrap;
+            }
+
+            .exec-micro {
+                border-left: none;
+                padding-left: 0;
+                border-bottom: 2px solid #39FF14;
+                padding-bottom: 6px;
+                display: inline-block;
             }
 
             .route-name {
@@ -2187,10 +2227,13 @@
             }
 
             .strategy-deck {
-                height: 400px;
+                height: auto;
+                flex-direction: column;
+                align-items: center;
                 justify-content: flex-start;
-                overflow-x: scroll;
-                padding-left: 20px;
+                overflow: visible;
+                padding: 0;
+                gap: 20px;
                 -ms-overflow-style: none;
                 scrollbar-width: none;
             }
@@ -2200,9 +2243,10 @@
             }
 
             .strategy-card {
-                position: relative;
-                margin-right: 20px;
-                flex-shrink: 0;
+                position: static;
+                width: 100%;
+                max-width: 380px;
+                margin: 0 auto;
             }
         }
 
@@ -2365,6 +2409,7 @@
         @media (max-width: 768px) {
             .hero-title {
                 font-size: 48px;
+                text-align: left;
             }
 
             .nav-center {
@@ -2375,15 +2420,41 @@
                 padding-top: 100px;
             }
 
+            .hero-content {
+                align-items: flex-start;
+                padding: 0 20px;
+            }
+
+            .hero-subtitle {
+                text-align: left;
+            }
+
             .btn-group {
                 flex-direction: column;
+                align-items: flex-start;
             }
 
             .nav-right {
-                gap: 10px;
+                gap: 8px;
             }
 
             .social-row {
+                display: flex;
+                gap: 6px;
+            }
+
+            .social-row .social-icon {
+                width: 32px;
+                height: 32px;
+            }
+
+            .social-row .social-icon svg,
+            .social-row .social-icon img {
+                width: 14px;
+                height: 14px;
+            }
+
+            .btn-ghost.btn-github {
                 display: none;
             }
         }
@@ -4340,6 +4411,13 @@
             margin-bottom: 80px;
         }
 
+        @media (max-width: 768px) {
+            .solana-features {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+        }
+
         /* 4. Glass Panel Modules (Modernized) */
         .glass-panel {
             background: rgba(255, 255, 255, 0.65);
@@ -5568,6 +5646,16 @@
                     height: 0;
                 }
 
+                .file-row.file-selected {
+                    background: rgba(0, 100, 200, 0.1);
+                    color: #0066cc;
+                }
+
+                .file-row.file-selected .file-name {
+                    color: #0066cc;
+                    font-weight: 600;
+                }
+
                 /* MIT Badge Shine */
                 .mit-badge {
                     position: relative;
@@ -5622,7 +5710,42 @@
                     font-style: italic;
                 }
 
-                /* Comment */
+                /* Mobile Responsive Styles */
+                @media (max-width: 768px) {
+                    .repo-body {
+                        flex-direction: column;
+                    }
+
+                    .tree-view {
+                        width: 100%;
+                        border-right: none;
+                        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+                        padding: 12px;
+                        max-height: 200px;
+                    }
+
+                    .tree-item {
+                        font-size: 14px;
+                        padding: 8px 10px;
+                        color: #333;
+                    }
+
+                    .file-name {
+                        color: #333;
+                        font-weight: 500;
+                    }
+
+                    .code-preview {
+                        min-height: 180px;
+                        padding: 16px;
+                        font-size: 12px;
+                        opacity: 1;
+                    }
+
+                    .file-tree-card {
+                        min-height: 350px;
+                    }
+                }
             </style>
 
             <div class="open-container">
@@ -5672,10 +5795,10 @@
                                     <span>agents</span>
                                 </div>
                                 <div class="tree-children">
-                                    <div class="tree-item file-row" onmouseover="showCode('trading')">
+                                    <div class="tree-item file-row" onmouseover="showCode('trading', this)" onclick="showCode('trading', this)">
                                         <span class="file-name">trading_engine.py</span>
                                     </div>
-                                    <div class="tree-item file-row" onmouseover="showCode('life')">
+                                    <div class="tree-item file-row" onmouseover="showCode('life', this)" onclick="showCode('life', this)">
                                         <span class="file-name">life_os.py</span>
                                     </div>
                                 </div>
@@ -5688,11 +5811,11 @@
                                     <span>strategies</span>
                                 </div>
                                 <div class="tree-children">
-                                    <div class="tree-item file-row" onmouseover="showCode('momentum')">
+                                    <div class="tree-item file-row" onmouseover="showCode('momentum', this)" onclick="showCode('momentum', this)">
                                         <span class="file-name">momentum_alpha.py</span>
                                     </div>
                                 </div>
-                                <div class="tree-item file-row" onmouseover="showCode('readme')">
+                                <div class="tree-item file-row" onmouseover="showCode('readme', this)" onclick="showCode('readme', this)">
                                     <span class="file-name">README.md</span>
                                 </div>
                             </div>
@@ -5744,16 +5867,22 @@ npm install jarvis-core
 jarvis start --daemon`
                 };
 
-                function showCode(key) {
+                function showCode(key, el) {
                     const pane = document.getElementById('codePane');
                     if (snippets[key]) {
                         pane.innerHTML = snippets[key];
                         pane.classList.add('active');
+                        // Highlight selected file
+                        document.querySelectorAll('.file-row').forEach(row => row.classList.remove('file-selected'));
+                        if (el) el.classList.add('file-selected');
                     }
                 }
 
-                // Init default
-                setTimeout(() => showCode('readme'), 1000);
+                // Init default - show readme immediately
+                setTimeout(() => {
+                    showCode('readme');
+                    document.querySelector('.file-row[onclick*="readme"]')?.classList.add('file-selected');
+                }, 500);
             </script>
         </section>
 
@@ -6161,26 +6290,26 @@ jarvis start --daemon`
             // --- MANIFESTO MARQUEE (Pinned Scroll Gate) ---
             const manifestoReducedMotion = prefersReducedMotion;
 
-            if (!manifestoReducedMotion && !isMobile) {
+            if (!manifestoReducedMotion) {
                 const manifestoTrack = document.querySelector('.manifesto-track');
                 if (manifestoTrack) {
-                    const trackWidth = manifestoTrack.scrollWidth;
-                    const viewportWidth = window.innerWidth;
-                    const moveDistance = Math.max(0, trackWidth - viewportWidth);
+                    const getMoveDistance = () => Math.max(0, manifestoTrack.scrollWidth - window.innerWidth);
 
-                    gsap.to(".manifesto-track", {
-                        x: -moveDistance,
+                    gsap.to(manifestoTrack, {
+                        x: () => -getMoveDistance(),
                         ease: "none",
                         scrollTrigger: {
                             trigger: ".manifesto-section",
                             pin: true,
                             scrub: 1.2,
                             start: "top top",
-                            end: () => "+=" + (window.innerWidth > 768 ? 2000 : 1200),
+                            end: () => "+=" + (isMobile ? 2200 : 2000),
                             invalidateOnRefresh: true,
                             anticipatePin: 1
                         }
                     });
+
+                    window.addEventListener('load', () => ScrollTrigger.refresh());
                 }
             }
 
@@ -8267,6 +8396,42 @@ jarvis start --daemon`
                     beatsBtn.title = 'Play beats';
                 }
             });
+        })();
+    </script>
+
+    <!-- Mobile Video Optimizer Script -->
+    <script>
+        (function() {
+            // Only apply on mobile screens (768px or less)
+            if (window.innerWidth <= 768) {
+                const videoMappings = {
+                    'jarvis3_optimized.mp4': 'jarvis3_mobile.mp4',
+                    'jarvis3_optimized.webm': 'jarvis3_mobile.mp4',
+                    'jarvis2_optimized.mp4': 'jarvis2_mobile.mp4',
+                    'jarvis2_optimized.webm': 'jarvis2_mobile.mp4',
+                    'section2-1_optimized.mp4': 'section2-1_mobile.mp4',
+                    'section2-1.webm': 'section2-1_mobile.mp4',
+                    'section2-2_optimized.mp4': 'section2-2_mobile.mp4',
+                    'section2-2.webm': 'section2-2_mobile.mp4',
+                    'data.mp4': 'data_mobile.mp4'
+                };
+
+                // Find all video sources and update them
+                document.querySelectorAll('video source').forEach(source => {
+                    const src = source.getAttribute('src');
+                    if (videoMappings[src]) {
+                        source.setAttribute('src', videoMappings[src]);
+                        source.setAttribute('type', 'video/mp4');
+                    }
+                });
+
+                // Reload videos to apply new sources
+                document.querySelectorAll('video').forEach(video => {
+                    video.load();
+                });
+
+                console.log('Mobile video optimization applied');
+            }
         })();
     </script>
 </body>
