@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls:*)",
+      "Bash(ffmpeg:*)",
+      "Bash(cmd.exe /c \"where ffmpeg\")",
+      "Bash(powershell -Command \"Get-Command ffmpeg -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Source\")",
+      "Bash(powershell -Command:*)",
+      "Bash(\"/c/Users/lucid/AppData/Local/Microsoft/WinGet/Packages/Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe/ffmpeg-8.0.1-full_build/bin/ffmpeg.exe\" -i \"C:/Users/lucid/OneDrive/Desktop/Projects/Jarvis-by-Kr8tiv-Website-main/Jarvis2.mp4\" -c:v libx264 -crf 28 -preset slow -vf \"scale=1920:-2\" -an -movflags +faststart \"C:/Users/lucid/OneDrive/Desktop/jarvis website/jarvis2_optimized.mp4\" -y)",
+      "Bash(\"/c/Users/lucid/AppData/Local/Microsoft/WinGet/Packages/Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe/ffmpeg-8.0.1-full_build/bin/ffmpeg.exe\" -i \"C:/Users/lucid/OneDrive/Desktop/Projects/Jarvis-by-Kr8tiv-Website-main/Jarvis2.mp4\" -c:v libvpx-vp9 -crf 35 -b:v 0 -vf \"scale=1920:-2\" -an \"C:/Users/lucid/OneDrive/Desktop/jarvis website/jarvis2_optimized.webm\" -y)",
+      "Bash(npx -y @anthropic-ai/claude-code mcp add memory -- npx -y @anthropic-ai/mcp-memory)",
+      "Bash(npx -y @anthropic-ai/claude-code mcp add thinking -- npx -y @modelcontextprotocol/server-sequential-thinking)",
+      "Bash(npx:*)"
+    ]
+  }
+}
