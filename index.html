@@ -2442,6 +2442,10 @@
                 padding: 0 20px;
             }
 
+            #universeVisual {
+                height: clamp(340px, 55vh, 460px) !important;
+            }
+
             .univ-headline {
                 font-size: 32px;
                 margin-bottom: 16px;
@@ -4174,7 +4178,7 @@
         /* Footer */
         .site-footer {
             width: 100%;
-            border-top: 1px solid rgba(0, 0, 0, 0.06);
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
             padding-top: 60px;
             padding-bottom: 60px;
             display: flex;
@@ -4188,6 +4192,7 @@
             font-weight: 600;
             font-size: 20px;
             letter-spacing: -0.5px;
+            color: #FFF;
         }
 
         .footer-links {
@@ -4197,18 +4202,18 @@
 
         .footer-link {
             font-size: 14px;
-            color: #666;
+            color: rgba(255, 255, 255, 0.72);
             text-decoration: none;
             transition: color 0.2s;
         }
 
         .footer-link:hover {
-            color: #000;
+            color: #FFF;
         }
 
         .footer-copy {
             font-size: 12px;
-            color: #999;
+            color: rgba(255, 255, 255, 0.5);
         }
 
         /* --- FIX PACK V1.0 (MOBILE PATCHES) --- */
@@ -4225,14 +4230,20 @@
             }
 
             /* Section 13: Token Stacking */
+            .token-container {
+                padding: 0 20px;
+            }
+
             .token-grid {
                 grid-template-columns: 1fr !important;
                 gap: 50px;
                 text-align: center;
+                justify-items: center;
             }
 
             .token-content {
                 align-items: center;
+                width: 100%;
             }
 
             .token-subhead {
@@ -4243,6 +4254,11 @@
             .token-visual {
                 min-height: 350px;
                 height: auto;
+                width: 100%;
+            }
+
+            #tokenVisual {
+                transform: none !important;
             }
 
             .chrome-token {
@@ -7431,13 +7447,19 @@ jarvis start --daemon`
             });
 
             // Headline
-            finalTl.from("#finalHeadline", {
-                scale: 0.9,
-                opacity: 0,
-                filter: "blur(10px)",
-                duration: 1,
-                ease: "power3.out"
-            })
+            finalTl.fromTo("#finalHeadline",
+                {
+                    scale: 0.9,
+                    opacity: 0,
+                    filter: "blur(10px)"
+                },
+                {
+                    scale: 1,
+                    opacity: 1,
+                    filter: "blur(0px)",
+                    duration: 1,
+                    ease: "power3.out"
+                })
                 .from("#finalSubhead", {
                     y: 10,
                     opacity: 0,
@@ -7445,15 +7467,22 @@ jarvis start --daemon`
                 }, "-=0.6");
 
             // Cards "Holographic Materialize"
-            finalTl.from(".path-card", {
-                scale: 0.8,
-                opacity: 0,
-                filter: "blur(20px)",
-                y: 40,
-                duration: 0.8,
-                stagger: 0.1,
-                ease: "back.out(1.7)"
-            }, "-=0.4");
+            finalTl.fromTo(".path-card",
+                {
+                    scale: 0.8,
+                    opacity: 0,
+                    filter: "blur(20px)",
+                    y: 40
+                },
+                {
+                    scale: 1,
+                    opacity: 1,
+                    filter: "blur(0px)",
+                    y: 0,
+                    duration: 0.8,
+                    stagger: 0.1,
+                    ease: "back.out(1.7)"
+                }, "-=0.4");
 
             // Footer Fade
             finalTl.from("#mainFooter", { opacity: 0, duration: 1 }, "-=0.2");

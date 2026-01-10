@@ -175,6 +175,17 @@
         canvas.width = width * dpr;
         canvas.height = height * dpr;
         ctx.scale(dpr, dpr);
+
+        updateNodeMetrics();
+    }
+
+    function updateNodeMetrics() {
+        if (!domNodes || domNodes.length === 0) return;
+        domNodes.forEach((node) => {
+            // Cache dimensions to avoid layout reads every frame
+            node.halfWidth = (node.el?.offsetWidth || 0) / 2;
+            node.halfHeight = (node.el?.offsetHeight || 0) / 2;
+        });
     }
 
     function createParticles() {
@@ -210,6 +221,7 @@
 
         const centerX = width / 2;
         const centerY = height / 2;
+        const isMobile = width < 768;
 
         // Update Core Position
         if (nodesResult.core) {
@@ -234,8 +246,23 @@
                 const angle = systemAngle + (i * angleStep) - (Math.PI / 2);
 
                 // Polar to Cartesian
-                const px = Math.cos(angle) * NODE_CONFIG.radius;
-                const py = Math.sin(angle) * NODE_CONFIG.radius;
+                let px = Math.cos(angle) * NODE_CONFIG.radius;
+                let py = Math.sin(angle) * NODE_CONFIG.radius;
+
+                // Keep labels inside the container on small screens
+                if (isMobile) {
+                    const padding = 12;
+                    let targetX = centerX + px;
+                    let targetY = centerY + py;
+                    const halfW = node.halfWidth || 0;
+                    const halfH = node.halfHeight || 0;
+
+                    targetX = Math.max(halfW + padding, Math.min(width - halfW - padding, targetX));
+                    targetY = Math.max(halfH + padding, Math.min(height - halfH - padding, targetY));
+
+                    px = targetX - centerX;
+                    py = targetY - centerY;
+                }
 
                 // Move DOM Element (Translate relative to center 50%, 50%)
                 // We use translate3d for GPU acceleration
