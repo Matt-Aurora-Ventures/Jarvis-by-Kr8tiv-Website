@@ -97,22 +97,40 @@ No build step required — pure HTML/CSS/JS.
 ## 📂 Project Structure
 
 ```
-├── index.html          # Main landing page (all-in-one)
-├── solana_bg.png       # Solana watermark asset
-├── section2-1.mp4      # Left card video texture
-├── section2-2.mp4      # Right card video texture
-└── README.md           # This file
+├── index.html              # Main landing page (all-in-one)
+├── footer_grid.js          # Physics-based grid animation for footer
+├── manifesto_bg.js         # Background effect for manifesto section
+├── jarvis3_optimized.mp4   # Hero video (desktop)
+├── jarvis3_mobile.mp4      # Hero video (mobile optimized)
+├── jarvis2_optimized.mp4   # Secondary video (desktop)
+├── jarvis2_mobile.mp4      # Secondary video (mobile optimized)
+├── section2-1_optimized.mp4 # Left card video texture
+├── section2-1_mobile.mp4   # Left card video (mobile)
+├── section2-2_optimized.mp4 # Right card video texture
+├── section2-2_mobile.mp4   # Right card video (mobile)
+├── data.mp4                # Data visualization video
+├── data_mobile.mp4         # Data video (mobile)
+├── beats.mp3               # Background music
+├── kr8tiv.png              # KR8TIV branding logo
+├── dexscreener.webp        # DexScreener icon
+├── bags-icon.png           # Bags.fm icon
+├── tab.png                 # Favicon
+├── social-share.png        # Open Graph share image
+├── 1-13.png                # Universe orbit asset icons
+└── README.md               # This file
 ```
 
 ---
 
 ## 🔗 Links
 
-- **Website**: [Live Demo](https://matt-aurora-ventures.github.io/Jarvis-by-Kr8tiv-Website/)
+- **Website**: [jarvislife.one](https://jarvislife.one)
 - **Token (DexScreener)**: [View $KR8TIV](https://dexscreener.com/solana/gnfeekylr79s7jkbippznlkivm1ufqmpnbqs96mxmgqq)
 - **Bags.fm**: [Buy $KR8TIV](https://bags.fm/b/kr8tiv)
 - **GitHub**: [Matt-Aurora-Ventures/Jarvis](https://github.com/Matt-Aurora-Ventures/Jarvis)
-- **Twitter/X**: [@Kr8tivAI](https://x.com/Kr8tivAI)
+- **Twitter/X**: [@kr8tivai](https://x.com/kr8tivai)
+- **LinkedIn**: [Matt Haynes](https://www.linkedin.com/in/matthaynes88)
+- **KR8TIV**: [kr8tiv.ai](https://kr8tiv.ai)
 
 ---
 
@@ -129,9 +147,15 @@ Join the movement:
 ## 📝 Changelog
 
 ### Recent Updates
-- **[Latest]** NanoBanana Route Visualization - Complete animated route monitoring system with gradient effects, packet animations, and node pulsing
-- **[New]** "Living Network" Token Engine - Interactive Canvas 2D visualization with rotating orbit labels, pulsing rings, and mouse-reactive particles
-- Full changelog available in [CHANGELOG.md](./CHANGELOG.md)
+- **[Latest]** Mobile optimization pass - Reduced Universe section whitespace, optimized video loading
+- **[New]** "by KR8TIV" branding - Logo added to navigation with link to kr8tiv.ai
+- **[New]** Beats player - Pulsating play button for background music
+- **[New]** Mobile video optimization - 720p mobile versions for faster loading
+- **[New]** SEO + Social sharing - Open Graph tags, Twitter cards, favicon
+- **[New]** Footer grid effect - Physics-based interactive grid overlay
+- **[New]** Pre-Alpha badge - Updated hero badge from v1.0
+- NanoBanana Route Visualization - Complete animated route monitoring system
+- "Living Network" Token Engine - Interactive Canvas 2D visualization with rotating orbit labels
 
 ---
 
