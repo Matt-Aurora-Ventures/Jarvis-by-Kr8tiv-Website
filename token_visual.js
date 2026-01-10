@@ -51,6 +51,7 @@
     let systemAngle = 0;
     let nodesResult = { core: null, peripherals: [] }; // Store positions for canvas
     let domNodes = []; // Store DOM elements
+    let orbitScale = 1;
 
     // Wait for DOM
     if (document.readyState === 'loading') {
@@ -162,6 +163,13 @@
         const isMobile = width < 768;
         NODE_CONFIG.radius = isMobile ? 170 : 290; // Increased from 120/200 to 170/290 to clear core text
 
+        // Keep outer rings/glow safely inside the canvas bounds.
+        // This prevents slight clipping on tighter layouts (e.g. 2-col desktop / mobile).
+        const maxOrbitRadius = 280;
+        const margin = 16; // accounts for stroke width + glow
+        const available = Math.max(0, (Math.min(width, height) / 2) - margin);
+        orbitScale = Math.min(1, Math.max(0.6, available / maxOrbitRadius));
+
         // Handle High DPI
         const dpr = window.devicePixelRatio || 1;
         canvas.width = width * dpr;
@@ -269,11 +277,12 @@
         const time = Date.now() * 0.002; // Speed of pulse
 
         uniqueRadii.forEach(radius => {
+            const scaledRadius = radius * orbitScale;
             // Check Mouse Proximity to Ring
             const dx = mouse.x - core.x;
             const dy = mouse.y - core.y;
             const distToMouse = Math.sqrt(dx * dx + dy * dy);
-            const distToRing = Math.abs(distToMouse - radius);
+            const distToRing = Math.abs(distToMouse - scaledRadius);
 
             const isHovered = distToRing < 20; // 20px threshold
 
@@ -284,7 +293,7 @@
             const pulse = (Math.sin(time - pulsePhase) + 1) / 2;
 
             ctx.beginPath();
-            ctx.arc(core.x, core.y, radius, 0, Math.PI * 2);
+            ctx.arc(core.x, core.y, scaledRadius, 0, Math.PI * 2);
 
             if (isHovered) {
                 ctx.strokeStyle = 'rgba(57, 255, 20, 0.5)'; // Brighter green on hover
@@ -313,8 +322,9 @@
             // Update Angle
             orbiter.angle += orbiter.speed;
 
-            const px = core.x + Math.cos(orbiter.angle) * orbiter.radius;
-            const py = core.y + Math.sin(orbiter.angle) * orbiter.radius;
+            const orbitRadius = orbiter.radius * orbitScale;
+            const px = core.x + Math.cos(orbiter.angle) * orbitRadius;
+            const py = core.y + Math.sin(orbiter.angle) * orbitRadius;
 
             ctx.beginPath();
             ctx.arc(px, py, orbiter.planetSize, 0, Math.PI * 2);

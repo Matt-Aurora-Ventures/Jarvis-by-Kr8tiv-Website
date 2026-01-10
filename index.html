@@ -4,7 +4,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jarvis LifeOS - Luminous Lab</title>
+    <title>Jarvis LifeOS - Your Personal AI Operating System</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Jarvis is not a chatbot. It's your LifeOS. Runs locally, watches, learns, acts, and evolves 24/7. Built on Solana with autonomous trading strategies. Open source and community driven.">
+    <meta name="keywords" content="Jarvis, LifeOS, AI assistant, Solana, trading bot, personal AI, local AI, open source">
+    <meta name="author" content="Luminous Lab">
+    <meta name="robots" content="index, follow">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="tab.png">
+    <link rel="apple-touch-icon" href="tab.png">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://jarvislife.io/">
+    <meta property="og:title" content="Jarvis LifeOS - Your Personal AI Operating System">
+    <meta property="og:description" content="Jarvis is not a chatbot. It's your LifeOS. Runs locally, watches, learns, acts, and evolves 24/7. Built on Solana. Open source.">
+    <meta property="og:image" content="https://jarvislife.io/social-share.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@kr8tivai">
+    <meta name="twitter:title" content="Jarvis LifeOS - Your Personal AI Operating System">
+    <meta name="twitter:description" content="Jarvis is not a chatbot. It's your LifeOS. Runs locally, watches, learns, acts, and evolves 24/7. Built on Solana. Open source.">
+    <meta name="twitter:image" content="https://jarvislife.io/social-share.png">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -456,27 +482,7 @@
         /* Mobile adjustments */
         @media (max-width: 768px) {
             .manifesto-section {
-                width: 100vw;
-                height: 100vh;
-                height: 100svh;
-                min-height: 100svh;
-                background: #f2f2f2;
-            }
-
-            .manifesto-inner {
-                width: 100vw;
-            }
-
-            .manifesto-section::before {
-                background:
-                    repeating-linear-gradient(0deg,
-                        transparent,
-                        transparent 59px,
-                        rgba(0, 0, 0, 0.03) 60px),
-                    repeating-linear-gradient(90deg,
-                        transparent,
-                        transparent 59px,
-                        rgba(0, 0, 0, 0.03) 60px);
+                display: none;
             }
 
             .manifesto-track span,
@@ -1376,6 +1382,12 @@
             z-index: 20;
         }
 
+        .logo-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
         .logo {
             font-family: var(--font-display);
             font-size: 20px;
@@ -1384,6 +1396,32 @@
             text-decoration: none;
             letter-spacing: 0.02em;
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        .by-kr8tiv {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            text-decoration: none;
+            opacity: 0.6;
+            transition: opacity 0.2s ease;
+        }
+
+        .by-kr8tiv:hover {
+            opacity: 1;
+        }
+
+        .by-kr8tiv span {
+            font-family: var(--font-body);
+            font-size: 9px;
+            color: var(--text-white);
+            text-transform: lowercase;
+        }
+
+        .by-kr8tiv img {
+            height: 14px;
+            width: auto;
+            filter: brightness(0) invert(1);
         }
 
         .nav-center {
@@ -2394,6 +2432,30 @@
         }
 
         @media (max-width: 768px) {
+            .section-universe {
+                min-height: auto;
+                padding-top: 40px;
+                padding-bottom: 40px;
+            }
+
+            .universe-container {
+                padding: 0 20px;
+            }
+
+            .univ-headline {
+                font-size: 32px;
+                margin-bottom: 16px;
+            }
+
+            .univ-subhead {
+                font-size: 18px;
+                margin-bottom: 20px;
+            }
+
+            .univ-micro {
+                margin-bottom: 30px;
+            }
+
             .orbit-scene {
                 width: 300px;
                 height: 300px;
@@ -2423,6 +2485,10 @@
             .hero-content {
                 align-items: flex-start;
                 padding: 0 20px;
+            }
+
+            .pill-badge {
+                align-self: center;
             }
 
             .hero-subtitle {
@@ -4884,7 +4950,13 @@
 
         <!-- Nav -->
         <nav>
-            <a href="#" class="logo">JARVIS</a>
+            <div class="logo-group">
+                <a href="#" class="logo">JARVIS</a>
+                <a href="https://kr8tiv.ai" target="_blank" class="by-kr8tiv">
+                    <span>by</span>
+                    <img src="kr8tiv.png" alt="KR8TIV">
+                </a>
+            </div>
 
             <div class="nav-center">
                 <a href="#tradingCore" class="nav-link">Capabilities</a>
@@ -6290,7 +6362,7 @@ jarvis start --daemon`
             // --- MANIFESTO MARQUEE (Pinned Scroll Gate) ---
             const manifestoReducedMotion = prefersReducedMotion;
 
-            if (!manifestoReducedMotion) {
+            if (!manifestoReducedMotion && !isMobile) {
                 const manifestoTrack = document.querySelector('.manifesto-track');
                 if (manifestoTrack) {
                     const getMoveDistance = () => Math.max(0, manifestoTrack.scrollWidth - window.innerWidth);
