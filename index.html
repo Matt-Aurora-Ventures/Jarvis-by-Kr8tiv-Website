@@ -66,6 +66,15 @@
             --section-gap: 120px;
         }
 
+        /* --- SECTION STACKING CONTEXT (Mobile video bleed fix) --- */
+        section {
+            position: relative;
+            z-index: 1;
+            isolation: isolate;
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
+        }
+
         /* --- GLOBAL H1 HOVER GLOW --- */
         /* Targets all major section headlines for a premium backlight effect */
         h1,
@@ -148,7 +157,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 0;
+            z-index: -1;
             overflow: hidden;
             border-radius: inherit;
             opacity: 0;
@@ -157,6 +166,12 @@
             /* B&W Default */
             transition: filter 0.6s ease;
             pointer-events: none;
+            /* GPU layer containment for mobile */
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            transform: translate3d(0, 0, 0);
+            -webkit-transform: translate3d(0, 0, 0);
+            contain: layout paint;
         }
 
         .glass-card:hover .card-video-layer {
@@ -1122,6 +1137,8 @@
         }
 
         .glass-card {
+            position: relative;
+            overflow: hidden;
             background: rgba(255, 255, 255, 0.6);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
@@ -1134,6 +1151,8 @@
             justify-content: center;
             text-align: center;
             min-height: 300px;
+            /* Ensure stacking context */
+            isolation: isolate;
         }
 
         .card-text {
@@ -2437,6 +2456,24 @@
         }
 
         @media (max-width: 768px) {
+            /* Mobile video bleed-through fix: solid backgrounds */
+            section {
+                background-color: var(--bg-dark, #0B0C0D);
+            }
+
+            /* White/light sections need explicit backgrounds */
+            .section-universe {
+                background-color: #FFFFFF !important;
+                background: radial-gradient(circle at 50% 50%, #F9F9F9 0%, #FFFFFF 60%) !important;
+            }
+
+            /* Extra containment for video layers on mobile */
+            .card-video-layer,
+            .final-video-bg {
+                overflow: hidden;
+                contain: strict;
+            }
+
             .section-universe {
                 min-height: auto;
                 padding-top: 40px;
@@ -4028,8 +4065,14 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 0;
+            z-index: -1;
             pointer-events: none;
+            /* GPU layer containment for mobile */
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            transform: translate3d(0, 0, 0);
+            -webkit-transform: translate3d(0, 0, 0);
+            contain: layout paint;
         }
 
         .final-video-bg video {
@@ -4935,6 +4978,7 @@
         .section-final-cta {
             position: relative;
             overflow: hidden;
+            isolation: isolate;
             /* Ensure video doesn't bleed */
         }
 
@@ -4945,8 +4989,14 @@
             width: 100%;
             height: 100%;
             /* Taller for parallax movement */
-            z-index: 0;
+            z-index: -1;
             will-change: transform;
+            /* GPU layer containment for mobile */
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            transform: translate3d(0, 0, 0);
+            -webkit-transform: translate3d(0, 0, 0);
+            contain: layout paint;
         }
 
         .final-video-bg video {
